@@ -17,7 +17,7 @@ export default function GamesTable({ players, setPlayers, selectPlayer}) {
     const [country, setCountry] = useState("");
     const [winLos, setWinLos] = useState("");
 
-    const addGame = () => {
+    function addGame() {
         if (!players[selectPlayer]) {
             window.alert("Игрок не выбран!");
             return;

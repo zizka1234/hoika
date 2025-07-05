@@ -12,9 +12,10 @@ export default function PlayersTable({players, setPlayers, selectPlayer, setSele
     const [isDelPVisible, setIsDelPVisible] = useState(false);
     const togleDelPBtn = () => setIsDelPVisible(prev => !prev);
     
-    const addPlayer = () => {
+    function addPlayer() {
         if (name.trim === "") return;
-        setPlayers([...players, new Player(players.length + 1, name, 0, 1000, 0, 0, 0, [])]);
+        const nextId = players.length > 0 ? Math.max(...players.map(p => p.id)) + 1 : 1;
+        setPlayers([...players, new Player(nextId, name, 0, 1000, 0, 0, 0, [])]);
         setName("");
         toggleAddPForm();
     }

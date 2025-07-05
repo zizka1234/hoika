@@ -39,7 +39,7 @@ function GameInfo(props) {
     const [newCountry, setNewCountry] = useState(props.game.country);
     const [newWinLos, setNewWinLos] = useState(props.game.winLos);
 
-    const handleChangeGame = () => {
+    function handleChangeGame() {
         const newPlayers = [...props.players];
         const newPlayer = {...newPlayers[props.selectPlayer]};
         const newGames = [...newPlayer.games];
@@ -80,23 +80,33 @@ function GameInfo(props) {
         toggleModGF();
     }
 
-    const handleDelGame = () => {
+    function handleDelGame() {
         if (window.confirm("Are you sure you want to delete the game?")) {
             props.setPlayers(
                 props.players.map((player, inx) => {
                     if (inx !== props.selectPlayer) return player;
+
+                    const updatedGames = player.games.toSpliced(props.gameIndex, 1);
+                    const deletedGame = player.games[props.gameIndex];
+
+                    const newWin = deletedGame.winLos ? player.win - 1 : player.win;
+                    const newLos = !deletedGame.winLos ? player.los - 1 : player.los;
+                    const newRating = deletedGame.winLos ? player.rating - 20 : player.rating + 20;
+                    const newGamesCount = player.gamesCount - 1;
+                    const newWR = newGamesCount > 0 ? (newWin / newGamesCount) * 100 : 0;
+
                     return {
                         ...player,
-                        gamesCount: player.games.length - 1,
-                        rating: player.games[props.gameIndex].winLos ? player.rating -= 20 : player.rating += 20,
-                        win: player.games[props.gameIndex].winLos ? player.win -= 1 : player.win,
-                        los: !player.games[props.gameIndex].winLos ? player.los -= 1 : player.los,
-                        wr: (player.win / player.gamesCount) * 100,
-                        games: player.games.toSpliced(props.gameIndex, 1)
+                        games: updatedGames,
+                        gamesCount: newGamesCount,
+                        win: newWin,
+                        los: newLos,
+                        rating: newRating,
+                        wr: newWR
                     };
                 })
-            );        
-        };
+            );
+        }
     }
 
     return (

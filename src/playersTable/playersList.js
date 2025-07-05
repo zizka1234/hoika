@@ -33,7 +33,7 @@ function AddRow(props) {
     const toggleModPF = () => setIsModPFVisible(prev => !prev);
     const [newName, setNewName] = useState(props.player.name);
     
-    const handleChangeName = (newName) => {
+    function handleChangeName(newName) {
         const newPlayers = [...props.players];
         const player = newPlayers[props.selectPlayer];
         player.name = newName;
@@ -42,9 +42,16 @@ function AddRow(props) {
         toggleModPF();
     }
 
-    const handleClickDelP = (player) => {
+    function handleClickDelP(player) {
         if (window.confirm("Are you sure you want to delete the player?")) {
-            props.setPlayers(props.players.toSpliced(props.players.indexOf(player), 1));
+            const index = props.players.findIndex(p => p.id === player.id);
+            if (index === -1) {
+                window.alert("Not found!");
+                return
+            }
+            const newPlayers = props.players.toSpliced(index, 1);
+            newPlayers.forEach(p => p.id = newPlayers.indexOf(p) + 1);
+            props.setPlayers(newPlayers);
         }
     }
 
