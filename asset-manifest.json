@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/hoika/static/css/main.3f7f10f6.css",
-    "main.js": "/hoika/static/js/main.50c981f5.js",
+    "main.js": "/hoika/static/js/main.cd4244fd.js",
     "index.html": "/hoika/index.html",
     "main.3f7f10f6.css.map": "/hoika/static/css/main.3f7f10f6.css.map",
-    "main.50c981f5.js.map": "/hoika/static/js/main.50c981f5.js.map"
+    "main.cd4244fd.js.map": "/hoika/static/js/main.cd4244fd.js.map"
   },
   "entrypoints": [
     "static/css/main.3f7f10f6.css",
-    "static/js/main.50c981f5.js"
+    "static/js/main.cd4244fd.js"
   ]
 }
